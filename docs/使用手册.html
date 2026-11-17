@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>壁纸解包 · 使用手册</title>
+<style>
+  :root{
+    --brand:#6c5ce7;--brand-2:#a855f7;--pink:#e84393;
+    --text:#241f3a;--sub:#5d5878;--line:#e6e2f5;
+    --bg:#f7f5ff;--card:#ffffff;--code:#f3f0ff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:32px 20px 64px;background:var(--bg);color:var(--text);
+    font:15px/1.75 "Microsoft YaHei UI","Segoe UI",system-ui,sans-serif;
+  }
+  .wrap{max-width:860px;margin:0 auto}
+  header{
+    display:flex;align-items:center;gap:16px;padding:24px 26px;border-radius:20px;
+    background:linear-gradient(135deg,#6c5ce7,#a855f7);
+    color:#fff;box-shadow:0 18px 40px rgba(108,92,231,.28);
+  }
+  header .logo{
+    width:52px;height:52px;border-radius:16px;flex:0 0 auto;
+    background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+    display:grid;place-items:center;font-size:26px;
+  }
+  header h1{margin:0;font-size:22px;letter-spacing:.5px}
+  header p{margin:4px 0 0;font-size:12.5px;opacity:.86}
+  .meta{
+    display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;font-size:12px;color:var(--sub);
+  }
+  .meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+  section{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:22px 26px;margin-top:16px;box-shadow:0 6px 18px rgba(60,40,140,.05);
+  }
+  h2{margin:0 0 12px;font-size:16.5px;display:flex;align-items:center;gap:9px}
+  h2 .n{
+    width:24px;height:24px;border-radius:8px;flex:0 0 auto;font-size:12.5px;
+    background:var(--code);color:var(--brand);display:grid;place-items:center;font-weight:700;
+  }
+  h3{margin:18px 0 6px;font-size:13.5px;color:var(--brand)}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px;padding:0}
+  li{margin:5px 0}
+  code{
+    background:var(--code);border-radius:6px;padding:1px 6px;
+    font-family:Consolas,"Courier New",monospace;font-size:12.5px;color:#4b3fb5;
+  }
+  kbd{
+    display:inline-block;min-width:22px;text-align:center;padding:1px 7px;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;
+    background:#fff;font-size:12px;font-family:inherit;color:var(--sub);
+  }
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--sub);font-weight:600;font-size:12.5px;background:#faf8ff}
+  tr:last-child td{border-bottom:none}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 6px}
+  .step{
+    background:var(--code);color:#4b3fb5;border-radius:10px;padding:7px 13px;
+    font-size:12.5px;border:1px solid #e2dbff;
+  }
+  .arrow{color:#b9b1e0;font-size:13px}
+  .tip{
+    margin:14px 0 0;padding:12px 15px;border-radius:12px;font-size:13px;
+    background:#f4f1ff;border:1px solid #e3dcff;color:var(--sub);
+  }
+  .tip b{color:var(--brand)}
+  .qa{margin-top:6px}
+  .qa dt{font-weight:600;font-size:13.5px;margin-top:16px;color:var(--text)}
+  .qa dd{margin:5px 0 0;color:var(--sub);font-size:13.5px}
+  footer{text-align:center;color:#9b95b8;font-size:12px;margin-top:28px}
+  @media print{
+    body{background:#fff;padding:0}
+    section,header{box-shadow:none;break-inside:avoid}
+    header{background:#6c5ce7 !important;-webkit-print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo">🧩</div>
+    <div>
+      <h1>壁纸解包 · 使用手册</h1>
+      <p>Wallpaper Engine 素材提取工具 · 版本 1.0.0</p>
+    </div>
+  </header>
+
+  <div class="meta">
+    <span>Windows 10 / 11</span>
+    <span>无需安装 .NET</span>
+    <span>内置解析引擎</span>
+    <span>支持图片 / 视频 / 网页壁纸</span>
+  </div>
+
+  <section>
+    <h2><span class="n">1</span>这个工具能做什么</h2>
+    <p>把 Wallpaper Engine 的壁纸素材解出来，挑你喜欢的部分保存到自己的文件夹。全程本地处理，不联网、不上传。</p>
+    <div class="flow">
+      <span class="step">选择壁纸</span><span class="arrow">→</span>
+      <span class="step">自动识别类型</span><span class="arrow">→</span>
+      <span class="step">开始解包</span><span class="arrow">→</span>
+      <span class="step">预览挑选</span><span class="arrow">→</span>
+      <span class="step">保存到本地</span>
+    </div>
+    <div class="tip"><b>核心原则：</b>解包只是把素材准备好供你预览，<b>不会自动往保存目录写文件</b>。只有你点击「保存」或「保存视频」时，才会真正保存。</div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>支持的壁纸类型</h2>
+    <table>
+      <tr><th>类型</th><th>识别依据</th><th>解包结果</th></tr>
+      <tr>
+        <td>Scene 场景</td>
+        <td>目录或文件中含 <code>scene.pkg</code></td>
+        <td>解出其中所有贴图，可在右侧逐张预览、挑选保存</td>
+      </tr>
+      <tr>
+        <td>纹理</td>
+        <td>单独的 <code>.tex</code> 文件</td>
+        <td>解出一张图片</td>
+      </tr>
+      <tr>
+        <td>视频</td>
+        <td>目录中含 <code>.mp4</code> 等视频文件</td>
+        <td>内嵌播放器预览，点「保存视频」才复制</td>
+      </tr>
+      <tr>
+        <td>网页 / 应用</td>
+        <td>目录中含网页壁纸的工程文件</td>
+        <td>整目录复制到保存位置下的同名子文件夹</td>
+      </tr>
+    </table>
+    <p>选好来源后，输入框下方会自动显示识别到的类型。如果显示「未知」，说明这个路径不是可识别的壁纸。</p>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>快速上手</h2>
+    <ol>
+      <li>点「选文件」选 <code>.pkg</code> / <code>.tex</code>，或点「选文件夹」选壁纸目录。</li>
+      <li>确认「输出设置」里的保存位置（可点「浏览」修改）。</li>
+      <li>点「开始解包」，等待右侧出现预览。</li>
+      <li>在图片之间挑选，确认后点「保存」。</li>
+    </ol>
+    <h3>壁纸目录在哪</h3>
+    <p>一般位于 <code>SteamLibrary\steamapps\workshop\content\431960\&lt;数字ID&gt;</code>。431960 是 Wallpaper Engine 的创意工坊编号。</p>
+    <div class="tip"><b>小技巧：</b>壁纸来源输入框<b>点一下就会全选</b>，直接 <kbd>Ctrl</kbd>+<kbd>V</kbd> 粘贴新路径即可覆盖，不用先删干净。保存位置输入框同样支持。</div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>图片壁纸：预览与保存</h2>
+    <h3>底部胶片条</h3>
+    <ul>
+      <li>解包完成后，预览区底部会出现一排缩略图，默认选中第 1 张。</li>
+      <li>单击任意缩略图切换大图，选中的那张会自动滚到中间。</li>
+      <li>缩略图多时可横向滚动；也支持 <kbd>←</kbd> <kbd>→</kbd> 或两侧的 ‹ › 按钮翻页。</li>
+    </ul>
+    <h3>保存</h3>
+    <table>
+      <tr><th>操作</th><th>说明</th></tr>
+      <tr><td>保存</td><td>按原名保存到保存位置；若同名文件已存在，会询问「覆盖 / 重命名 / 取消」</td></tr>
+      <tr><td>另存为</td><td>弹出文件对话框，自选目录和文件名</td></tr>
+      <tr><td>文件名输入框</td><td>留空使用解包出的原名；填写则用你指定的名字保存</td></tr>
+    </table>
+    <div class="tip"><b>提示：</b>解出的图片先放在系统临时目录，所以反复切换图片不会在你的保存目录里留下垃圾文件。</div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span>视频壁纸</h2>
+    <p>选中视频壁纸后点「开始解包」，右侧会直接内嵌播放器，<b>此时不会复制任何文件</b>。</p>
+    <ul>
+      <li>播放器支持暂停、拖动进度条、静音切换。</li>
+      <li>信息区显示文件名、大小、分辨率、时长，以及是否已保存。</li>
+      <li>确认没问题后点「保存视频」，才会复制到保存位置；重名时自动加 <code>(1)</code>、<code>(2)</code>。</li>
+      <li>想放到别的位置，用「另存为」。</li>
+    </ul>
+    <div class="tip"><b>如果画面黑屏或提示无法播放：</b>少数壁纸使用 HEVC 编码，需要系统安装对应的解码扩展。可以先「保存视频」，再用本地播放器（PotPlayer / VLC 等）打开确认。</div>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span>设置</h2>
+    <p>点右上角设置按钮打开，共三项：</p>
+    <table>
+      <tr><th>项目</th><th>作用</th></tr>
+      <tr><td>保存位置</td><td>「保存」默认写入的目录，主界面也能直接改</td></tr>
+      <tr><td>仅提取图片</td><td>开启：只导出贴图；关闭：连场景里的其他文件一起导出</td></tr>
+      <tr><td>主题</td><td>深色 / 浅色 / 娇羞（蜜桃粉），点击立即生效并记住</td></tr>
+    </table>
+    <p>所有设置自动保存，下次启动沿用。</p>
+  </section>
+
+  <section>
+    <h2><span class="n">7</span>快捷键</h2>
+    <table>
+      <tr><th>按键</th><th>位置</th><th>作用</th></tr>
+      <tr><td><kbd>Enter</kbd></td><td>壁纸来源输入框</td><td>直接开始解包</td></tr>
+      <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>主界面（非输入框）</td><td>上一张 / 下一张</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>设置弹窗</td><td>关闭弹窗</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>路径输入框</td><td>全选 / 粘贴（点击已自动全选）</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="n">8</span>常见问题</h2>
+    <dl class="qa">
+      <dt>提示「无法识别该壁纸类型」</dt>
+      <dd>确认选的是壁纸<b>目录</b>（里面应含 <code>project.json</code> 或 <code>scene.pkg</code>），或直接选 <code>.pkg</code> / <code>.tex</code> 文件。选了上一层或更深的子目录都可能识别不到。</dd>
+
+      <dt>解包成功，但提示 0 张图片</dt>
+      <dd>这个壁纸可能只有视频、音频或网页资源。把「仅提取图片」关掉再试一次；视频请直接看右侧播放器。</dd>
+
+      <dt>网页 / 应用壁纸看不到预览</dt>
+      <dd>这类壁纸没有可直接预览的静态图，文件已复制到保存位置下的同名子文件夹，到文件夹里查看即可。</dd>
+
+      <dt>保存时报「权限不足」或失败</dt>
+      <dd>换一个非系统盘目录（例如 <code>D:\壁纸\</code>），避免直接存到 <code>C:\Program Files</code> 或需要管理员权限的位置。</dd>
+
+      <dt>启动要等 2~5 秒</dt>
+      <dd>界面基于 Windows 自带的 WebView2 渲染，首次启动有初始化开销，属正常现象；启动时出现的渐变画面就是加载过渡。</dd>
+
+      <dt>杀毒软件报警</dt>
+      <dd>PyInstaller 打包的程序容易被启发式误报，可添加信任或白名单。程序不联网，也不修改系统设置。</dd>
+
+      <dt>临时文件在哪里</dt>
+      <dd><code>%TEMP%\repkg_ui_cache</code>，可随时手动清空；下次解包会自动重建。</dd>
+
+      <dt>配置文件</dt>
+      <dd>exe 同目录的 <code>repkg_ui_config.json</code>，记录保存位置、仅提取图片、主题和上次路径。删掉即恢复默认。</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2><span class="n">9</span>文件结构</h2>
+    <table>
+      <tr><th>文件 / 文件夹</th><th>必需</th><th>说明</th></tr>
+      <tr><td><code>壁纸解包.exe</code></td><td>是</td><td>主程序，双击启动</td></tr>
+      <tr><td><code>_internal\</code></td><td>是</td><td>运行库与界面资源，请勿删除或移动</td></tr>
+      <tr><td><code>使用手册.html</code></td><td>否</td><td>本手册，双击用浏览器打开</td></tr>
+      <tr><td><code>repkg_ui_config.json</code></td><td>否</td><td>首次运行后自动生成</td></tr>
+    </table>
+    <div class="tip"><b>分发提醒：</b>这是绿色版，拷贝时请把<b>整个文件夹</b>一起复制，只拿 exe 无法运行。建议右键 exe →「发送到」→「桌面快捷方式」。</div>
+  </section>
+
+  <footer>壁纸解包 · 使用手册 · 版本 1.0.0</footer>
+</div>
+</body>
+</html>

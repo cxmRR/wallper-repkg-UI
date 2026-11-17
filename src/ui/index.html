@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>壁纸解包</title>
+<style>
+  :root{
+    --text:#F2EEFF;
+    --sub:#B9B2D6;
+    --dim:#8E87B0;
+    --line:rgba(255,255,255,.10);
+    --glass:rgba(255,255,255,.065);
+    --field:rgba(255,255,255,.075);
+    --field-hi:rgba(255,255,255,.10);
+    --placeholder:#807AA2;
+    --ghost-bg:rgba(255,255,255,.075);
+    --ghost-bg-h:rgba(255,255,255,.13);
+    --ghost-fg:#D7D1F2;
+    --chip-bg:rgba(124,108,248,.18);
+    --chip-fg:#C9C1FA;
+    --chip-line:rgba(150,138,255,.24);
+    --track:rgba(255,255,255,.16);
+    --knob:#F3F0FF;
+    --switch-fg:#E4DFFA;
+    --stage-a:rgba(255,255,255,.05);
+    --stage-b:rgba(12,8,26,.34);
+    --stage-line:rgba(255,255,255,.07);
+    --empty-fg:#9A92BD;
+    --icon-bg:rgba(255,255,255,.08);
+    --icon-bg-h:rgba(255,255,255,.15);
+    --icon-fg:#D5CFF0;
+    --log-bg:rgba(8,5,20,.42);
+    --log-fg:#AEA7CC;
+    --scroll:rgba(255,255,255,.16);
+    --tlink:#B7AEF0;
+    --tlink-h:#E0DAFF;
+    --label-b:#CFC7F2;
+    --mask:rgba(10,6,22,.55);
+    --sheet-a:rgba(52,44,86,.94);
+    --sheet-b:rgba(36,30,62,.94);
+    --sheet-line:rgba(255,255,255,.13);
+    --toast-a:rgba(58,50,96,.96);
+    --toast-b:rgba(34,29,60,.96);
+    --toast-line:rgba(255,255,255,.14);
+    --shadow-1:rgba(6,3,18,.34);
+    --shadow-2:rgba(6,3,18,.32);
+    --shadow-3:rgba(4,2,14,.6);
+    --app-bg:#171326;
+    --app-layers:
+      radial-gradient(820px 620px at 10% 4%, rgba(158,112,255,.62), transparent 62%),
+      radial-gradient(720px 520px at 92% 14%, rgba(92,140,255,.50), transparent 64%),
+      radial-gradient(760px 620px at 78% 100%, rgba(66,196,198,.38), transparent 62%),
+      radial-gradient(620px 480px at 4% 96%, rgba(226,110,172,.34), transparent 64%),
+      linear-gradient(158deg,#221A3C 0%,#191430 42%,#141C2A 100%);
+    --logo-shadow:rgba(110,96,246,.42);
+    --violet:#7C6CF8;
+    --violet2:#5E8BF6;
+    --pink:#E06AA8;
+    --pink2:#C4518D;
+    --teal:#48B0C8;
+    --teal2:#2F7E95;
+  }
+  /* 浅色主题 */
+  body.light{
+    --text:#2A2340;
+    --sub:#5E5779;
+    --dim:#847DA0;
+    --line:rgba(90,70,150,.14);
+    --glass:rgba(255,255,255,.56);
+    --field:rgba(255,255,255,.80);
+    --field-hi:#fff;
+    --placeholder:#A29BBA;
+    --ghost-bg:rgba(124,108,248,.10);
+    --ghost-bg-h:rgba(124,108,248,.20);
+    --ghost-fg:#4A3F72;
+    --chip-bg:rgba(124,108,248,.14);
+    --chip-fg:#5B4CC4;
+    --chip-line:rgba(124,108,248,.30);
+    --track:rgba(90,70,150,.20);
+    --knob:#fff;
+    --switch-fg:#3B3358;
+    --stage-a:rgba(255,255,255,.62);
+    --stage-b:rgba(124,108,248,.06);
+    --stage-line:rgba(90,70,150,.10);
+    --empty-fg:#7C7495;
+    --icon-bg:rgba(255,255,255,.78);
+    --icon-bg-h:#fff;
+    --icon-fg:#4A3F72;
+    --log-bg:rgba(255,255,255,.75);
+    --log-fg:#5E5779;
+    --scroll:rgba(90,70,150,.22);
+    --tlink:#6B5AD6;
+    --tlink-h:#3B3358;
+    --label-b:#5B4CC4;
+    --mask:rgba(60,45,110,.28);
+    --sheet-a:rgba(255,255,255,.97);
+    --sheet-b:rgba(244,240,255,.97);
+    --sheet-line:rgba(255,255,255,.90);
+    --toast-a:rgba(255,255,255,.97);
+    --toast-b:rgba(243,240,255,.97);
+    --toast-line:rgba(90,70,150,.12);
+    --shadow-1:rgba(80,60,140,.14);
+    --shadow-2:rgba(80,60,140,.13);
+    --shadow-3:rgba(60,45,110,.28);
+    --app-bg:#F2EEFB;
+    --app-layers:
+      radial-gradient(820px 620px at 10% 4%, rgba(186,158,255,.55), transparent 62%),
+      radial-gradient(720px 520px at 92% 14%, rgba(150,190,255,.55), transparent 64%),
+      radial-gradient(760px 620px at 78% 100%, rgba(126,222,220,.45), transparent 62%),
+      radial-gradient(620px 480px at 4% 96%, rgba(255,176,208,.42), transparent 64%),
+      linear-gradient(158deg,#F8F3FF 0%,#EFF1FC 42%,#EAF7F9 100%);
+    --logo-shadow:rgba(110,96,246,.30);
+  }
+  /* 娇羞 / 蜜桃粉主题 */
+  body.blush{
+    --text:#4A2E3A;
+    --sub:#7C5A66;
+    --dim:#A88C96;
+    --line:rgba(214,140,160,.20);
+    --glass:rgba(255,255,255,.60);
+    --field:rgba(255,255,255,.84);
+    --field-hi:#fff;
+    --placeholder:#C0A4AD;
+    --ghost-bg:rgba(238,127,168,.13);
+    --ghost-bg-h:rgba(238,127,168,.24);
+    --ghost-fg:#8C4A62;
+    --chip-bg:rgba(238,127,168,.16);
+    --chip-fg:#C2477B;
+    --chip-line:rgba(238,127,168,.36);
+    --track:rgba(214,140,160,.24);
+    --knob:#fff;
+    --switch-fg:#6E4652;
+    --stage-a:rgba(255,255,255,.68);
+    --stage-b:rgba(255,182,193,.14);
+    --stage-line:rgba(214,140,160,.14);
+    --empty-fg:#9C7C88;
+    --icon-bg:rgba(255,255,255,.80);
+    --icon-bg-h:#fff;
+    --icon-fg:#7A4A5C;
+    --log-bg:rgba(255,255,255,.78);
+    --log-fg:#7C5A66;
+    --scroll:rgba(214,140,160,.28);
+    --tlink:#D1477F;
+    --tlink-h:#8C3A5C;
+    --label-b:#C2477B;
+    --mask:rgba(120,60,80,.28);
+    --sheet-a:rgba(255,255,255,.97);
+    --sheet-b:rgba(255,238,243,.97);
+    --sheet-line:rgba(255,255,255,.90);
+    --toast-a:rgba(255,255,255,.97);
+    --toast-b:rgba(255,240,244,.97);
+    --toast-line:rgba(214,140,160,.18);
+    --shadow-1:rgba(180,110,140,.14);
+    --shadow-2:rgba(180,110,140,.13);
+    --shadow-3:rgba(150,80,110,.26);
+    --app-bg:#FDF1F4;
+    --app-layers:
+      radial-gradient(820px 620px at 10% 4%, rgba(255,178,205,.52), transparent 62%),
+      radial-gradient(720px 520px at 92% 14%, rgba(255,205,180,.52), transparent 64%),
+      radial-gradient(760px 620px at 78% 100%, rgba(236,196,255,.42), transparent 62%),
+      radial-gradient(620px 480px at 4% 96%, rgba(255,150,180,.38), transparent 64%),
+      linear-gradient(158deg,#FFF6F3 0%,#FDECF1 44%,#F9EFFB 100%);
+    --logo-shadow:rgba(238,127,168,.32);
+    --violet:#EE7FA8;
+    --violet2:#F2A98F;
+    --pink:#E0447B;
+    --pink2:#B92E62;
+    --teal:#D9A6C8;
+    --teal2:#A87FCB;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;overflow:hidden}
+  body{
+    font-family:"Microsoft YaHei UI","Segoe UI",system-ui,sans-serif;
+    color:var(--text);
+    background:var(--app-bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 整窗渐变：多层径向光斑 + 对角线性渐变，全部柔和过渡 */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;
+    background:var(--app-layers);
+  }
+  .app{
+    position:relative;z-index:1;height:100%;
+    display:flex;flex-direction:column;gap:12px;
+    padding:16px 20px 14px;
+  }
+
+  /* ---------- 顶部 ---------- */
+  header{
+    display:flex;align-items:center;gap:14px;
+    padding:13px 20px;border-radius:20px;
+    background:var(--glass);border:1px solid var(--line);
+    backdrop-filter:blur(26px) saturate(130%);
+    box-shadow:0 18px 46px var(--shadow-1);
+  }
+  .logo{
+    width:34px;height:34px;border-radius:11px;display:block;flex:none;
+    box-shadow:0 6px 18px var(--logo-shadow);
+    -webkit-user-drag:none;user-select:none;
+  }
+  h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.5px}
+  .sub{font-size:11.5px;color:var(--dim);margin-left:2px}
+  .spacer{flex:1}
+
+  /* ---------- 主体 ---------- */
+  main{
+    flex:1;min-height:0;
+    display:grid;grid-template-columns:374px minmax(0,1fr);gap:12px;
+  }
+  .card{
+    background:var(--glass);border:1px solid var(--line);
+    backdrop-filter:blur(26px) saturate(130%);
+    border-radius:22px;
+    box-shadow:0 20px 52px var(--shadow-2);
+    display:flex;flex-direction:column;min-height:0;
+  }
+  .left{padding:20px 20px 18px;overflow:hidden}
+  .right{padding:14px;overflow:hidden}
+
+  .label{font-size:11.5px;color:var(--sub);margin:0 0 8px;letter-spacing:.4px}
+  .label b{color:var(--label-b);font-weight:600}
+  .group+.group{margin-top:16px}
+
+  input[type=text]{
+    width:100%;height:38px;padding:0 12px;
+    color:var(--text);font-size:12.5px;font-family:inherit;
+    background:var(--field);border:1px solid var(--line);
+    border-radius:12px;outline:none;transition:.2s;
+  }
+  input[type=text]::placeholder{color:var(--placeholder)}
+  input[type=text]:focus{
+    border-color:rgba(150,138,255,.62);
+    box-shadow:0 0 0 3px rgba(122,110,255,.16);
+    background:var(--field-hi);
+  }
+  .row{display:flex;gap:8px;margin-top:8px}
+  .row>input{flex:1}
+
+  button{
+    font-family:inherit;font-size:12.5px;cursor:pointer;
+    border:1px solid transparent;border-radius:12px;height:38px;
+    color:#fff;transition:transform .12s,filter .18s,background .18s;
+    white-space:nowrap;
+  }
+  button:active{transform:scale(.975)}
+  .ghost{
+    background:var(--ghost-bg);color:var(--ghost-fg);border-color:var(--line);
+  }
+  .ghost:hover{background:var(--ghost-bg-h)}
+  .primary{
+    background:linear-gradient(135deg,var(--violet),var(--violet2));
+    box-shadow:0 8px 22px rgba(110,96,246,.36);
+  }
+  .primary:hover{filter:brightness(1.1)}
+  .pink{background:linear-gradient(135deg,var(--pink),var(--pink2));
+    box-shadow:0 8px 20px rgba(210,96,150,.30)}
+  .pink:hover{filter:brightness(1.08)}
+  .teal{background:linear-gradient(135deg,var(--teal),var(--teal2));
+    box-shadow:0 8px 20px rgba(72,176,200,.26)}
+  .teal:hover{filter:brightness(1.08)}
+  .wide{width:100%}
+
+  .type{
+    display:flex;align-items:center;gap:8px;
+    font-size:11.5px;color:var(--dim);margin-top:11px;
+  }
+  .chip{
+    padding:3px 10px;border-radius:9px;font-size:11px;
+    background:var(--chip-bg);color:var(--chip-fg);
+    border:1px solid var(--chip-line);
+  }
+
+  /* 开关 */
+  .switch{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+  .switch span{font-size:12.5px;color:var(--switch-fg)}
+  .toggle{position:relative;width:46px;height:26px;flex:none}
+  .toggle input{position:absolute;opacity:0;width:0;height:0}
+  .track{
+    position:absolute;inset:0;border-radius:13px;cursor:pointer;
+    background:var(--track);transition:.24s;
+  }
+  .track::after{
+    content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+    background:var(--knob);transition:.24s;box-shadow:0 2px 6px rgba(0,0,0,.28);
+  }
+  .toggle input:checked+.track{background:linear-gradient(135deg,var(--violet),var(--violet2))}
+  .toggle input:checked+.track::after{transform:translateX(20px)}
+
+  .actions{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:8px}
+
+  /* ---------- 预览 ---------- */
+  .stage{
+    flex:1;min-height:0;border-radius:17px;
+    background:
+      radial-gradient(120% 100% at 50% 0%, var(--stage-a), transparent 70%),
+      var(--stage-b);
+    border:1px solid var(--stage-line);
+    display:grid;place-items:center;overflow:hidden;position:relative;
+  }
+  .stage img{
+    max-width:100%;max-height:100%;object-fit:contain;
+    border-radius:8px;display:block;
+  }
+  .empty{color:var(--empty-fg);font-size:12.5px;text-align:center;padding:20px}
+  .stage .empty{max-width:100%;max-height:100%;overflow-y:auto}
+  /* 底部胶片条 */
+  .strip{
+    display:flex;gap:8px;margin-top:10px;padding:2px 2px 6px;
+    overflow-x:auto;overflow-y:hidden;flex:0 0 auto;
+  }
+  .strip.hide{display:none}
+  .strip button{
+    flex:0 0 auto;width:88px;height:58px;border-radius:10px;padding:0;overflow:hidden;
+    background:var(--icon-bg);border:1px solid var(--line);cursor:pointer;
+    opacity:.58;transition:opacity .15s,border-color .15s,transform .12s;
+  }
+  .strip button:hover{opacity:.9;transform:translateY(-1px)}
+  .strip button.on{opacity:1;border-color:var(--pink);box-shadow:0 0 0 1px var(--pink)}
+  .strip img{width:100%;height:100%;object-fit:cover;display:block}
+  .strip::-webkit-scrollbar{height:6px}
+  .strip::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+  /* 视频壁纸：只有文字说明 */
+  .vinfo{text-align:left;max-width:520px;padding:6px 4px}
+  .vinfo h4{margin:0 0 14px;font-size:14px;font-weight:600;letter-spacing:.3px;color:var(--text)}
+  .vplay{
+    display:block;width:100%;max-height:230px;margin-bottom:14px;border-radius:12px;
+    background:#000;object-fit:contain;
+  }
+  .vinfo .vrow{
+    font-size:12px;color:var(--sub);margin-top:8px;line-height:1.6;
+    word-break:break-all;text-align:left;
+  }
+  .vinfo .vrow b{color:var(--text);font-weight:600;margin-right:7px}
+  .navrow{display:flex;align-items:center;gap:8px;margin-top:12px}
+  .navrow input{flex:1}
+  .icon{
+    width:34px;height:34px;border-radius:11px;padding:0;
+    background:var(--icon-bg);color:var(--icon-fg);border:1px solid var(--line);
+    font-size:13px;
+  }
+  .icon:hover{background:var(--icon-bg-h)}
+  .count{font-size:11.5px;color:var(--dim);min-width:96px;text-align:center;white-space:nowrap}
+  .navrow .savebtns{display:flex;gap:8px}
+  .navrow .savebtns button{height:34px;padding:0 16px}
+
+  /* ---------- 日志 ---------- */
+  .logwrap{
+    max-height:0;opacity:0;overflow:hidden;
+    border-radius:16px;background:var(--log-bg);
+    border:1px solid transparent;
+    transition:max-height .26s ease,opacity .2s,padding .26s,border-color .26s;
+  }
+  .logwrap.open{
+    max-height:150px;opacity:1;padding:10px 14px;
+    border-color:var(--stage-line);
+  }
+  #log{
+    height:100%;overflow:auto;font-family:Consolas,"Courier New",monospace;
+    font-size:10.5px;line-height:1.55;color:var(--log-fg);white-space:pre-wrap;
+  }
+  #log::-webkit-scrollbar{width:6px}
+  #log::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:3px}
+
+  /* ---------- 底部 ---------- */
+  footer{
+    display:flex;align-items:center;gap:12px;
+    padding:9px 16px;border-radius:16px;
+    background:var(--glass);border:1px solid var(--line);
+    backdrop-filter:blur(22px);
+    font-size:11.5px;color:var(--sub);
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--dim);flex:none}
+  .dot.ok{background:#5FD9A4;box-shadow:0 0 10px rgba(95,217,164,.55)}
+  .dot.err{background:#FF7B7B;box-shadow:0 0 10px rgba(255,123,123,.5)}
+  .dot.run{background:#9C8CFF;box-shadow:0 0 10px rgba(156,140,255,.6)}
+  .spin{
+    width:13px;height:13px;border-radius:50%;
+    border:2px solid var(--track);border-top-color:var(--violet);
+    animation:sp .8s linear infinite;display:none;
+  }
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .tlink{margin-left:auto;color:var(--tlink);cursor:pointer;user-select:none}
+  .tlink:hover{color:var(--tlink-h)}
+
+  /* ---------- 弹窗 ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:9;display:none;place-items:center;
+    background:var(--mask);
+    backdrop-filter:blur(8px);
+  }
+  .modal.show{display:grid}
+  .sheet{
+    width:520px;max-width:calc(100vw - 60px);
+    background:linear-gradient(160deg,var(--sheet-a),var(--sheet-b));
+    border:1px solid var(--sheet-line);border-radius:22px;
+    padding:22px;box-shadow:0 30px 80px var(--shadow-3);
+  }
+  .sheet h3{margin:0 0 4px;font-size:15px}
+  .sheet p{margin:0 0 16px;font-size:11.5px;color:var(--dim);line-height:1.6}
+  .sheet .row{margin-top:0}
+  .sheet .foot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+  .sheet .foot button{height:36px;padding:0 18px}
+  .muted{color:var(--dim);font-size:11px;margin-top:10px}
+  .hide{display:none!important}
+
+  /* 主题选择 */
+  .themebar{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+  .thopt{
+    flex:1 1 110px;display:flex;align-items:center;gap:8px;
+    padding:9px 11px;border-radius:13px;cursor:pointer;
+    background:var(--field);border:1px solid var(--line);
+    font-size:12px;color:var(--sub);transition:.18s;user-select:none;
+  }
+  .thopt:hover{background:var(--field-hi)}
+  .thopt.active{
+    border-color:rgba(140,120,255,.72);
+    box-shadow:0 0 0 3px rgba(124,108,248,.16);
+    color:var(--text);
+  }
+  .sw{width:20px;height:20px;border-radius:7px;flex:none;border:1px solid var(--line)}
+  .sw-dark{background:linear-gradient(140deg,#3A2E63,#171326 55%,#141C2A)}
+  .sw-light{background:linear-gradient(140deg,#F8F3FF,#E7E9FB 55%,#E4F5F7)}
+  .sw-blush{background:linear-gradient(140deg,#FFE9F0,#FBC3D6 55%,#F9D6C4)}
+  body.blush .thopt.active{border-color:rgba(238,127,168,.72);background:rgba(255,240,245,.95)}
+  .thopt .tick{margin-left:auto;font-size:11px;color:var(--violet);opacity:0}
+  .thopt.active .tick{opacity:1}
+
+  /* ---------- 浮层提示 ---------- */
+  .toasts{
+    position:fixed;right:20px;bottom:56px;z-index:30;
+    display:flex;flex-direction:column;gap:10px;align-items:flex-end;
+    pointer-events:none;
+  }
+  .toast{
+    display:flex;align-items:center;gap:11px;
+    min-width:186px;max-width:330px;padding:11px 16px 12px 12px;
+    border-radius:15px;position:relative;overflow:hidden;
+    background:linear-gradient(150deg,var(--toast-a),var(--toast-b));
+    border:1px solid var(--toast-line);
+    box-shadow:0 16px 40px var(--shadow-3);
+    backdrop-filter:blur(18px);
+    animation:tin .3s cubic-bezier(.2,.9,.3,1.15);
+  }
+  .toast.out{animation:tout .24s forwards}
+  @keyframes tin{from{opacity:0;transform:translateX(26px) scale(.96)}to{opacity:1;transform:none}}
+  @keyframes tout{to{opacity:0;transform:translateX(18px) scale(.97)}}
+  .toast .ic{
+    width:26px;height:26px;border-radius:9px;flex:none;
+    display:grid;place-items:center;font-size:13px;font-weight:700;color:#fff;
+  }
+  .toast.ok .ic{background:linear-gradient(140deg,#5BDCAC,#2CA981);
+    box-shadow:0 5px 14px rgba(84,214,170,.42)}
+  .toast.err .ic{background:linear-gradient(140deg,#FF8585,#D24747);
+    box-shadow:0 5px 14px rgba(255,110,110,.36)}
+  .toast .tt{font-size:12.5px;font-weight:600;letter-spacing:.2px}
+  .toast .ts{
+    font-size:11px;color:var(--sub);margin-top:3px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:250px;
+  }
+  .toast .bar{
+    position:absolute;left:0;bottom:0;height:2px;width:100%;
+    background:linear-gradient(90deg,#5BDCAC,#7C6CF8);
+    transform-origin:left;animation:bar 2.4s linear forwards;
+  }
+  .toast.err .bar{background:linear-gradient(90deg,#FF8585,#D24747)}
+  @keyframes bar{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <img class="logo" id="logo" alt="壁纸解包" src="data:image/png;base64,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">
+    <div>
+      <h1>壁纸解包</h1>
+    </div>
+    <div class="sub">RePKG · Wallpaper Engine 素材提取</div>
+    <div class="spacer"></div>
+    <button class="ghost" id="btnSettings" style="height:34px;padding:0 16px">设置</button>
+  </header>
+
+  <main>
+    <!-- 左：来源与输出 -->
+    <section class="card left">
+      <div class="group">
+        <p class="label"><b>①</b> 壁纸来源</p>
+        <input type="text" id="input" placeholder="选择 .pkg / .tex 或壁纸文件夹">
+        <div class="row">
+          <button class="ghost wide" id="btnFile">选文件</button>
+          <button class="ghost wide" id="btnFolder">选文件夹</button>
+        </div>
+        <div class="type">类型 <span class="chip" id="typeChip">未选择</span></div>
+      </div>
+
+      <div class="group">
+        <p class="label"><b>②</b> 输出设置</p>
+        <div class="row" style="margin-top:0">
+          <input type="text" id="output" placeholder="保存位置（导出图片到这里）">
+          <button class="ghost" id="btnOutput" style="width:62px">浏览</button>
+        </div>
+        <div class="switch">
+          <span>仅提取图片</span>
+          <label class="toggle">
+            <input type="checkbox" id="only" checked>
+            <span class="track"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="btnRun" style="height:42px">开始解包</button>
+        <button class="teal" id="btnOpen" style="height:36px">打开保存位置</button>
+      </div>
+    </section>
+
+    <!-- 右：预览 -->
+    <section class="card right">
+      <div class="stage" id="stage">
+        <div class="empty" id="empty">解包完成后在这里显示图片</div>
+        <img id="pic" class="hide" alt="">
+      </div>
+      <div class="strip hide" id="strip"></div>
+      <div class="navrow" id="navrow">
+        <button class="icon" id="btnPrev">‹</button>
+        <div class="count" id="count">—</div>
+        <button class="icon" id="btnNext">›</button>
+        <input type="text" id="name" placeholder="文件名（留空则用解包出的原名）">
+        <div class="savebtns">
+          <button class="pink" id="btnSave">保存</button>
+          <button class="ghost" id="btnSaveAs">另存为</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="logwrap" id="logwrap"><div id="log"></div></div>
+
+  <footer>
+    <span class="dot" id="dot"></span>
+    <span id="status">就绪</span>
+    <div class="spin" id="spin"></div>
+    <span class="tlink" id="btnLog">显示日志</span>
+  </footer>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<!-- 设置 -->
+<div class="modal" id="mSettings">
+  <div class="sheet">
+    <h3>设置</h3>
+
+    <p style="margin-bottom:8px">外观主题</p>
+    <div class="themebar" id="themeBar">
+      <div class="thopt" data-theme="dark">
+        <span class="sw sw-dark"></span>深色<span class="tick">✓</span>
+      </div>
+      <div class="thopt" data-theme="light">
+        <span class="sw sw-light"></span>浅色<span class="tick">✓</span>
+      </div>
+      <div class="thopt" data-theme="blush">
+        <span class="sw sw-blush"></span>娇羞<span class="tick">✓</span>
+      </div>
+    </div>
+
+    <div class="foot">
+      <button class="primary" data-close>关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- 同名确认 -->
+<div class="modal" id="mOverwrite">
+  <div class="sheet">
+    <h3>已存在同名文件</h3>
+    <p id="owName"></p>
+    <div class="foot">
+      <button class="ghost" id="owCancel">取消</button>
+      <button class="ghost" id="owRename">自动重命名</button>
+      <button class="pink" id="owOverwrite">覆盖</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const api = () => window.pywebview.api;
+const st = { total: 0, index: 0, busy: false, name: '', video: null };
+let vrows = null;
+let lastPrefs = null;
+
+/* 先按上次的主题上色，避免启动闪一下深色 */
+try {
+  const t0 = localStorage.getItem('theme');
+  if (t0 === 'light' || t0 === 'blush') document.body.classList.add(t0);
+} catch (e) { /* 忽略 */ }
+
+/* ---------- 主题 ---------- */
+function applyTheme(theme, persist) {
+  if (!['dark', 'light', 'blush'].includes(theme)) theme = 'dark';
+  document.body.classList.toggle('light', theme === 'light');
+  document.body.classList.toggle('blush', theme === 'blush');
+  document.querySelectorAll('.thopt').forEach(o => {
+    o.classList.toggle('active', o.dataset.theme === theme);
+  });
+  try { localStorage.setItem('theme', theme); } catch (e) { /* 忽略 */ }
+  if (persist) api().set_theme(theme);
+}
+
+/* ---------- Python 主动推送的事件 ---------- */
+window.__ui = {
+  log(d) {
+    const box = $('#log');
+    const line = document.createElement('div');
+    line.textContent = d.text || '';
+    box.appendChild(line);
+    while (box.childElementCount > 400) box.removeChild(box.firstChild);
+    box.scrollTop = box.scrollHeight;
+  },
+  status(d) {
+    setStatus(d.text || '', d.tone || '');
+    if (d.busy !== undefined) setBusy(!!d.busy);
+  }
+};
+
+function setStatus(text, tone) {
+  $('#status').textContent = text;
+  $('#dot').className = 'dot' + (tone ? ' ' + tone : '');
+}
+function setBusy(b) {
+  st.busy = b;
+  $('#btnRun').disabled = b;
+  $('#btnRun').textContent = b ? '处理中…' : '开始解包';
+  $('#spin').style.display = b ? 'block' : 'none';
+}
+function setType(name) {
+  $('#typeChip').textContent = name || '未识别';
+}
+
+/* ---------- 浮层提示 ---------- */
+function toast(title, sub, type = 'ok') {
+  const box = $('#toasts');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+
+  const ic = document.createElement('div');
+  ic.className = 'ic';
+  ic.textContent = type === 'ok' ? '✓' : '!';
+
+  const body = document.createElement('div');
+  const tt = document.createElement('div');
+  tt.className = 'tt';
+  tt.textContent = title;
+  body.appendChild(tt);
+  if (sub) {
+    const ts = document.createElement('div');
+    ts.className = 'ts';
+    ts.textContent = sub;
+    body.appendChild(ts);
+  }
+
+  const bar = document.createElement('i');
+  bar.className = 'bar';
+
+  el.append(ic, body, bar);
+  box.appendChild(el);
+  while (box.childElementCount > 3) box.removeChild(box.firstChild);
+
+  setTimeout(() => {
+    el.classList.add('out');
+    setTimeout(() => el.remove(), 260);
+  }, 2400);
+}
+
+/* ---------- 初始化 ---------- */
+window.addEventListener('pywebviewready', async () => {
+  const s = await api().init();
+  $('#input').value = s.input || '';
+  $('#output').value = s.output || '';
+  $('#only').checked = !!s.only;
+  applyTheme(s.theme || 'dark', false);
+  setType(s.type);
+  lastPrefs = prefsKey();
+  $('#input').focus();
+});
+
+/* 路径输入框：点一下全选，直接粘贴即可替换整条路径 */
+['#input', '#output'].forEach(sel => {
+  const el = $(sel);
+  let hadFocus = false;
+  el.addEventListener('mousedown', () => { hadFocus = document.activeElement === el; });
+  el.addEventListener('focus', () => el.select());          // Tab 切换进来也全选
+  el.addEventListener('mouseup', e => {                     // 防止点击的落点把全选取消
+    if (!hadFocus) { e.preventDefault(); el.select(); }
+  });
+});
+
+/* ---------- 选择 ---------- */
+$('#btnFile').onclick = async () => {
+  const r = await api().pick_file();
+  if (r && r.path) { $('#input').value = r.path; setType(r.type); savePrefs(); }
+};
+$('#btnFolder').onclick = async () => {
+  const r = await api().pick_folder();
+  if (r && r.path) { $('#input').value = r.path; setType(r.type); savePrefs(); }
+};
+$('#btnOutput').onclick = async () => {
+  const r = await api().pick_output();
+  if (r && r.path) { $('#output').value = r.path; }
+};
+$('#input').addEventListener('change', async () => {
+  const r = await api().check_type($('#input').value);
+  setType(r.type);
+  savePrefs();
+});
+$('#only').addEventListener('change', savePrefs);
+
+function prefsKey() {
+  return [$('#input').value, $('#output').value, $('#only').checked].join('\u0000');
+}
+
+function savePrefs() {
+  const key = prefsKey();
+  if (key === lastPrefs) return;   // 内容没变就不往 Python 传
+  lastPrefs = key;
+  api().save_prefs({
+    input: $('#input').value,
+    output: $('#output').value,
+    only: $('#only').checked
+  });
+}
+
+/* ---------- 解包 ---------- */
+$('#btnRun').onclick = async () => {
+  if (st.busy) return;
+  setBusy(true);
+  st.video = null;
+  vrows = null;
+  $('#strip').classList.add('hide');
+  $('#strip').textContent = '';
+  setStatus('处理中…', 'run');
+  $('#log').innerHTML = '';
+  let r;
+  try {
+    r = await api().extract({
+      input: $('#input').value,
+      output: $('#output').value,
+      only: $('#only').checked
+    });
+  } catch (e) {
+    r = { ok: false, msg: String(e) };
+  }
+  setBusy(false);
+  if (r.output) { $('#output').value = r.output; savePrefs(); }
+
+  if (!r.ok) {
+    setStatus(r.msg || '解包失败', 'err');
+    if (r.msg) window.__ui.log({ text: r.msg });
+    return;
+  }
+  st.total = r.count || 0;
+  st.index = 0;
+  setType(r.kind);
+
+  if (r.kind === 'video') {
+    st.video = r.video || null;
+    showVideo(r.video, r.msg);
+    setStatus('视频已就绪，点「保存视频」才会复制到保存位置', 'ok');
+    return;
+  }
+  st.video = null;
+
+  if (st.total) { buildStrip(); await show(0); } else showEmpty(r.kind);
+  setStatus(r.count ? `完成：共 ${r.count} 张图片` : '完成', 'ok');
+};
+
+/* 视频壁纸：内联播放 + 信息行，保存是显式动作 */
+function showVideo(v, msg) {
+  const box = $('#empty');
+  $('#pic').classList.add('hide');
+  $('#navrow').classList.remove('hide');
+  $('#strip').classList.add('hide');
+  box.classList.remove('hide');
+  box.textContent = '';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'vinfo';
+
+  let vid = null;
+  if (v && v.uri) {
+    vid = document.createElement('video');
+    vid.className = 'vplay';
+    vid.src = v.uri;
+    vid.controls = true;
+    vid.loop = true;
+    vid.muted = true;
+    vid.preload = 'metadata';
+    wrap.appendChild(vid);
+  }
+
+  const h = document.createElement('h4');
+  h.textContent = '视频壁纸';
+  wrap.appendChild(h);
+
+  vrows = {};
+  const rows = [
+    ['文件名', v && v.name ? v.name : '—'],
+    ['大小', v && v.size ? v.size : '—'],
+    ['分辨率', v ? '读取中…' : '—'],
+    ['时长', v ? '读取中…' : '—'],
+    ['保存位置', v && v.saved ? v.saved : '尚未保存'],
+    ['说明', msg || '预览确认后点「保存视频」']
+  ];
+  rows.forEach(([k, val]) => {
+    const d = document.createElement('div');
+    d.className = 'vrow';
+    const b = document.createElement('b');
+    b.textContent = k;
+    const s = document.createElement('span');
+    s.textContent = val;
+    d.appendChild(b);
+    d.appendChild(s);
+    wrap.appendChild(d);
+    vrows[k] = s;
+  });
+
+  if (vid) {
+    const fmt = t => {
+      const n = Math.round(t);
+      return `${Math.floor(n / 60)}:${String(n % 60).padStart(2, '0')}`;
+    };
+    vid.addEventListener('loadedmetadata', () => {
+      if (vid.videoWidth) vrows['分辨率'].textContent = `${vid.videoWidth} × ${vid.videoHeight}`;
+      if (isFinite(vid.duration) && vid.duration > 0) vrows['时长'].textContent = fmt(vid.duration);
+    });
+    vid.addEventListener('error', () => {
+      vrows['分辨率'].textContent = '无法播放';
+      vrows['时长'].textContent = '编码不受支持';
+    });
+  }
+
+  box.appendChild(wrap);
+  $('#count').textContent = '—';
+  $('#btnPrev').classList.add('hide');
+  $('#btnNext').classList.add('hide');
+  $('#name').value = '';
+  $('#name').placeholder = '文件名（另存为时可改）';
+  $('#btnSave').textContent = '保存视频';
+}
+
+function showEmpty(kind) {
+  $('#navrow').classList.remove('hide');
+  $('#pic').classList.add('hide');
+  $('#strip').classList.add('hide');
+  $('#strip').textContent = '';
+  $('#empty').classList.remove('hide');
+  $('#count').textContent = '—';
+  $('#name').value = '';
+  $('#btnPrev').classList.remove('hide');
+  $('#btnNext').classList.remove('hide');
+  $('#name').placeholder = '文件名（留空则用解包出的原名）';
+  $('#btnSave').textContent = '保存';
+  vrows = null;
+  let t = '没有找到可预览的图片';
+  if (kind === 'video') t = '没有找到可预览的视频';
+  if (kind === 'web' || kind === 'application') t = '网页/应用壁纸已复制到保存位置，无静态图片可预览';
+  $('#empty').textContent = t;
+}
+
+/* ---------- 底部胶片条 ---------- */
+function buildStrip() {
+  const strip = $('#strip');
+  strip.textContent = '';
+  if (!st.total) { strip.classList.add('hide'); return; }
+  api().thumbs().then(list => {
+    if (!list || !list.length) return;
+    strip.textContent = '';
+    list.forEach(t => {
+      const b = document.createElement('button');
+      b.dataset.i = t.i;
+      b.title = `第 ${t.i + 1} 张`;
+      if (t.src) {
+        const im = new Image();
+        im.src = t.src;
+        im.alt = '';
+        b.appendChild(im);
+      }
+      b.onclick = e => { if (e.detail > 1) return; show(t.i); };
+      strip.appendChild(b);
+    });
+    strip.classList.remove('hide');
+    markStrip();
+  }).catch(() => {});
+}
+
+function markStrip() {
+  const strip = $('#strip');
+  strip.querySelectorAll('button').forEach(b => {
+    b.classList.toggle('on', Number(b.dataset.i) === st.index);
+  });
+  // 选中的缩略图滚到中间，省得自己拖滚动条（仍可手动滚动）
+  const on = strip.querySelector('button.on');
+  if (!on) return;
+  const sb = strip.getBoundingClientRect(), ob = on.getBoundingClientRect();
+  const delta = (ob.left - sb.left) - (strip.clientWidth - ob.width) / 2;
+  strip.scrollTo({ left: strip.scrollLeft + delta, behavior: 'smooth' });
+}
+
+/* ---------- 预览 ---------- */
+async function show(i) {
+  if (!st.total) return;
+  $('#navrow').classList.remove('hide');
+  $('#btnPrev').classList.remove('hide');
+  $('#btnNext').classList.remove('hide');
+  $('#btnSave').textContent = '保存';
+  $('#name').placeholder = '文件名（留空则用解包出的原名）';
+  st.index = (i + st.total) % st.total;
+  const r = await api().preview(st.index);
+  if (r.error) {
+    $('#pic').classList.add('hide');
+    $('#empty').classList.remove('hide');
+    $('#empty').textContent = '无法预览该图片';
+  } else {
+    $('#pic').src = r.src;
+    $('#pic').classList.remove('hide');
+    $('#empty').classList.add('hide');
+  }
+  st.name = r.name || '';
+  $('#name').value = st.name;
+  const shown = st.name.length > 26 ? st.name.slice(0, 12) + '…' + st.name.slice(-10) : st.name;
+  $('#count').textContent = `${st.index + 1} / ${st.total}　${shown}`;
+  markStrip();
+
+  // 预热前后两张，翻页时不必等缩略图生成
+  if (st.total > 1) {
+    api().warm((st.index + 1) % st.total).catch(() => {});
+    api().warm((st.index - 1 + st.total) % st.total).catch(() => {});
+  }
+}
+
+$('#btnPrev').onclick = () => show(st.index - 1);
+$('#btnNext').onclick = () => show(st.index + 1);
+document.addEventListener('keydown', e => {
+  const t = e.target;
+  if (e.key === 'Escape') { closeModals(); return; }
+  if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) {
+    if (e.key === 'Enter' && t.id === 'input') { e.preventDefault(); $('#btnRun').click(); }
+    return;
+  }
+  if (document.querySelector('.modal.show')) return;
+  if (e.key === 'ArrowLeft') show(st.index - 1);
+  if (e.key === 'ArrowRight') show(st.index + 1);
+});
+
+/* ---------- 保存 ---------- */
+$('#btnSave').onclick = async () => {
+  if (st.video) {
+    const r = await api().save_video({ dir: $('#output').value });
+    if (r.ok) markVideoSaved(r.path);
+    setStatus(r.msg || (r.ok ? '已保存视频' : '保存失败'), r.ok ? 'ok' : 'err');
+    return;
+  }
+  if (!st.total) { setStatus('当前没有可保存的图片', 'err'); return; }
+  const r = await api().save_image(st.index, $('#name').value, 'auto');
+  if (r.exists) { $('#owName').textContent = r.name; $('#mOverwrite').classList.add('show'); return; }
+  finishSave(r);
+};
+
+function markVideoSaved(path) {
+  if (st.video) st.video.saved = path;
+  if (vrows && vrows['保存位置']) vrows['保存位置'].textContent = path;
+}
+
+$('#owCancel').onclick = () => { closeModals(); setStatus('已取消保存'); };
+$('#owOverwrite').onclick = async () => {
+  closeModals();
+  finishSave(await api().save_image(st.index, $('#name').value, 'overwrite'));
+};
+$('#owRename').onclick = async () => {
+  closeModals();
+  finishSave(await api().save_image(st.index, $('#name').value, 'rename'));
+};
+
+function finishSave(r) {
+  if (r.ok) {
+    setStatus(r.msg, 'ok');
+    if (r.name) $('#name').value = r.name;
+    toast('保存成功', r.name || '');
+  } else {
+    setStatus(r.msg || '保存失败', 'err');
+    toast('保存失败', r.msg || '', 'err');
+  }
+}
+
+$('#btnSaveAs').onclick = async () => {
+  if (st.video) {
+    const r = await api().save_video_as();
+    if (r.cancelled) return;
+    if (r.ok) markVideoSaved(r.path);
+    setStatus(r.msg || (r.ok ? '已保存视频' : '保存失败'), r.ok ? 'ok' : 'err');
+    return;
+  }
+  if (!st.total) { setStatus('当前没有可保存的图片', 'err'); return; }
+  const r = await api().save_as(st.index, $('#name').value);
+  if (r.cancelled) return;
+  finishSave(r);
+};
+
+/* ---------- 其他 ---------- */
+$('#btnOpen').onclick = async () => {
+  const r = await api().open_output();
+  if (r.ok) { if (r.path) $('#output').value = r.path; }
+  else setStatus(r.msg || '无法打开', 'err');
+};
+
+$('#btnLog').onclick = () => {
+  const w = $('#logwrap');
+  w.classList.toggle('open');
+  $('#btnLog').textContent = w.classList.contains('open') ? '隐藏日志' : '显示日志';
+};
+
+$('#btnSettings').onclick = () => $('#mSettings').classList.add('show');
+document.querySelectorAll('.thopt').forEach(o => {
+  o.onclick = () => applyTheme(o.dataset.theme, true);
+});
+
+document.querySelectorAll('[data-close]').forEach(b => b.onclick = closeModals);
+document.querySelectorAll('.modal').forEach(m => {
+  m.addEventListener('mousedown', e => { if (e.target === m) closeModals(); });
+});
+function closeModals() {
+  document.querySelectorAll('.modal').forEach(m => m.classList.remove('show'));
+}
+</script>
+</body>
+</html>
